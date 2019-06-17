@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
    config.vm.network "private_network", ip: "192.168.56.10"
 	config.vm.host_name = "ckan.local"
 	config.vm.provider "virtualbox" do |vb|
-		 vb.name = "sciamlab_ckan_vbox"
+		 vb.name = "louisvilledatacommons"
 	    vb.customize ["modifyvm", :id, "--memory", "2048"]
 	    vb.customize ["modifyvm", :id, "--cpus", "2"]  
     end
