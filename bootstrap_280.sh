@@ -109,7 +109,7 @@ virtualenv --no-site-packages /usr/lib/ckan
 pip install --upgrade pip
 
 # current development 2.8 version
-pip install -e 'git+https://github.com/ckan/ckan.git@dev-v2.8#egg=ckan'
+pip install -e 'git+https://github.com/adaptiveapplications/ckan.git@dev-v2.8#egg=ckan'
 
 # WORKAROUND: In order to support PostgreSQL 10 the psycopg2
 #             version should be set to  2.7.3.1 in requirement.txt
