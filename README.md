@@ -86,7 +86,10 @@ To make admin user:
 	 	 . /usr/lib/ckan/bin/activate
 	  	paster help
 		paster sysadmin add <user> -c /etc/ckan/production.ini 
-(prompt)	y
-(prompt)	<your email>
-(prompt)	<password — at least 8 characters>
-(prompt) 	<password>
+		
+(prompts)
+
+		y
+		<your email>
+		<password — at least 8 characters>
+	 	<password>
