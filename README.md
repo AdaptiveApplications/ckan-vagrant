@@ -75,3 +75,18 @@ If you want additional tools and packages are added and maintained updated here 
 
 ## License
 Apache License Version 2.0. See [LICENSE](LICENSE) for more details
+
+
+## How to add admin user to ckan site
+To make admin user:
+		
+		cd ckan-vagrant
+		vagrant ssh
+	 	cd sciamlab-ckan/src/ckan
+	 	 . /usr/lib/ckan/bin/activate
+	  	paster help
+		paster sysadmin add <user> -c /etc/ckan/production.ini 
+(prompt)	y
+(prompt)	<your email>
+(prompt)	<password — at least 8 characters>
+(prompt) 	<password>
