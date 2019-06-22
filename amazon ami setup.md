@@ -13,5 +13,7 @@ sudo systemctl reload apache2
 
 ## create a user
 ``cd /usr/lib/ckan/src/ckan/
+
 . /usr/lib/ckan/bin/activate
+
 paster sysadmin add parker -c /etc/ckan/production.ini``
