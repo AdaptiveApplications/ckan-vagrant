@@ -24,7 +24,7 @@ With the CKAN setup are also bootstrapped and configured the following CKAN exte
 2. **Clone this repo**
 
 	```shell
-	$ git clone git@gitlab.com:sciamlab/ckan-vagrant.git
+	$ git clone https://github.com/AdaptiveApplications/ckan-vagrant.git
 	$ cd ckan-vagrant
 	```
 3. **Create the running VM**
