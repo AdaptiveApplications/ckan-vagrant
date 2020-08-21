@@ -67,7 +67,7 @@ tar -xzf solr-7.3.0.tgz solr-7.3.0/bin/install_solr_service.sh --strip-component
 sudo ./install_solr_service.sh solr-7.3.0.tgz
 sudo -u solr /opt/solr/bin/solr create -c ckan
 sudo service solr stop
-sudo cp /var/solr/data/ckan/conf/solrconfig.xml /vagrant/confsave/confsave/solrconfig_730_pre.xml
+sudo cp /var/solr/data/ckan/conf/solrconfig.xml /vagrant/confsave/solrconfig_730_pre.xml
 
 sudo -u solr sed -i '103d' /var/solr/data/ckan/conf/solrconfig.xml
 sudo -u solr sed -i '103i  <schemaFactory class="ClassicIndexSchemaFactory"/>' /var/solr/data/ckan/conf/solrconfig.xml
@@ -83,7 +83,7 @@ sudo -u solr sed -i '1196i            processor="uuid,remove-blank,field-name-mu
 sudo -u solr sed -i '761i      <str name="q.op">AND</str>' /var/solr/data/ckan/conf/solrconfig.xml
 sudo -u solr sed -i '694i      <str name="q.op">AND</str>' /var/solr/data/ckan/conf/solrconfig.xml
 
-sudo cp /var/solr/data/ckan/conf/solrconfig.xml /vagrant/confsave/confsave/solrconfig_730_post.xml
+sudo cp /var/solr/data/ckan/conf/solrconfig.xml /vagrant/confsave/solrconfig_730_post.xml
 
 sudo -u solr cp /vagrant/confsave/artifacts/schema.xml /var/solr/data/ckan/conf/schema.xml
 echo "# ADD JTS TO THE SOLR SETUP"
@@ -132,7 +132,7 @@ echo "################################"
 
 paster make-config ckan /etc/ckan/development.ini
 
-cp /etc/ckan/development.ini /vagrant/confsave/confsave/development_280.ini
+cp /etc/ckan/development.ini /vagrant/confsave/development_280.ini
 
 sed -i '48d' /etc/ckan/development.ini
 sed -i '48i sqlalchemy.url = postgresql://ckan:ckan2017@localhost/ckandb' /etc/ckan/development.ini
