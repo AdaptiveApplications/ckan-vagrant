@@ -67,7 +67,7 @@ tar -xzf solr-7.3.0.tgz solr-7.3.0/bin/install_solr_service.sh --strip-component
 sudo ./install_solr_service.sh solr-7.3.0.tgz
 sudo -u solr /opt/solr/bin/solr create -c ckan
 sudo service solr stop
-sudo cp /var/solr/data/ckan/conf/solrconfig.xml $HOME/ckan-vagrant/confsave/solrconfig_730_pre.xml
+sudo cp /var/solr/data/ckan/conf/solrconfig.xml /vagrant/confsave/confsave/solrconfig_730_pre.xml
 
 sudo -u solr sed -i '103d' /var/solr/data/ckan/conf/solrconfig.xml
 sudo -u solr sed -i '103i  <schemaFactory class="ClassicIndexSchemaFactory"/>' /var/solr/data/ckan/conf/solrconfig.xml
@@ -83,11 +83,11 @@ sudo -u solr sed -i '1196i            processor="uuid,remove-blank,field-name-mu
 sudo -u solr sed -i '761i      <str name="q.op">AND</str>' /var/solr/data/ckan/conf/solrconfig.xml
 sudo -u solr sed -i '694i      <str name="q.op">AND</str>' /var/solr/data/ckan/conf/solrconfig.xml
 
-sudo cp /var/solr/data/ckan/conf/solrconfig.xml $HOME/ckan-vagrant/confsave/solrconfig_730_post.xml
+sudo cp /var/solr/data/ckan/conf/solrconfig.xml /vagrant/confsave/confsave/solrconfig_730_post.xml
 
-sudo -u solr cp $HOME/ckan-vagrant/artifacts/schema.xml /var/solr/data/ckan/conf/schema.xml
+sudo -u solr cp /vagrant/confsave/artifacts/schema.xml /var/solr/data/ckan/conf/schema.xml
 echo "# ADD JTS TO THE SOLR SETUP"
-unzip $HOME/ckan-vagrant/artifacts/jts-release-1.15.0-bin.zip -d jts
+unzip /vagrant/confsave/artifacts/jts-release-1.15.0-bin.zip -d jts
 sudo cp jts/lib/* /opt/solr/server/lib/
 echo "# START SOL SERVICE"
 sudo service solr start
@@ -132,7 +132,7 @@ echo "################################"
 
 paster make-config ckan /etc/ckan/development.ini
 
-cp /etc/ckan/development.ini $HOME/ckan-vagrant/confsave/development_280.ini
+cp /etc/ckan/development.ini /vagrant/confsave/confsave/development_280.ini
 
 sed -i '48d' /etc/ckan/development.ini
 sed -i '48i sqlalchemy.url = postgresql://ckan:ckan2017@localhost/ckandb' /etc/ckan/development.ini
@@ -204,7 +204,7 @@ sed -i '104s/$/ geo_view geojson_view wmts_view/' /etc/ckan/development.ini
 echo "# ENABLE CKAN PAGE TRACKING #"
 echo "#############################"
 sed -i '185i ckan.tracking_enabled = true' /etc/ckan/development.ini
-crontab -u $VMUSER $HOME/ckan-vagrant/artifacts/crontab
+crontab -u $VMUSER /vagrant/confsave/artifacts/crontab
 
 
 ## WSGI
@@ -213,12 +213,12 @@ echo "################################"
 #add required apache2 modules
 a2enmod headers
 
-cp $HOME/ckan-vagrant/artifacts/ckan.conf /etc/apache2/sites-available
+cp /vagrant/confsave/artifacts/ckan.conf /etc/apache2/sites-available
 a2ensite ckan
 sed -i '3i ServerAlias '`hostname -I | cut -d" " -f2` /etc/apache2/sites-available/ckan.conf
 
 
-cp $HOME/ckan-vagrant/artifacts/apache.wsgi /etc/ckan/apache.wsgi
+cp /vagrant/confsave/artifacts/apache.wsgi /etc/ckan/apache.wsgi
 # create a production.ini
 cp /etc/ckan/development.ini /etc/ckan/production.ini
 
@@ -232,7 +232,7 @@ cd /home/$VMUSER/sciamlab-ckan/src/ckan
 # add sysadmin rights to the ckan.local user 
 paster sysadmin add ckan.local -c /etc/ckan/production.ini
 # set the password of the ckan.local user
-expect $HOME/ckan-vagrant/artifacts/paster.spawn
+expect /vagrant/confsave/artifacts/paster.spawn
 
 
 # SETUP THE DATAPUSHER
@@ -249,8 +249,8 @@ sudo git clone -b 0.0.13 https://github.com/ckan/datapusher.git src
 cd /usr/lib/datapusher/src
 ../bin/pip install -r requirements.txt
 ../bin/python setup.py develop
-cp $HOME/ckan-vagrant/artifacts/datapusher.apache2-4.conf /etc/apache2/sites-available/datapusher.conf
-cp $HOME/ckan-vagrant/artifacts/datapusher.wsgi /etc/ckan/ 
+cp /vagrant/confsave/artifacts/datapusher.apache2-4.conf /etc/apache2/sites-available/datapusher.conf
+cp /vagrant/confsave/artifacts/datapusher.wsgi /etc/ckan/ 
 cp deployment/datapusher_settings.py /etc/ckan/
 sudo sh -c 'echo "NameVirtualHost *:8800" >> /etc/apache2/ports.conf'
 sudo sh -c 'echo "Listen 8800" >> /etc/apache2/ports.conf'
